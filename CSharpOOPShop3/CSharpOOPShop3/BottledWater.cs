@@ -12,19 +12,32 @@ namespace CSharpOOPShop3
         //Proprietà
 
         private float liters;
-        private int ph;
-        private string waterSpring;
+        private readonly int ph;
+        private readonly string waterSpring;
 
-
-        private float maxCapacity;
         private bool isCarbonated;
 
-        //Costruttore
-        public BottledWater(string name, string description, float basePrice, float liters, int ph, string waterSpring, bool isCarbonated) : base(name, description, basePrice)
-        {
-            this.maxCapacity = 1.5f;
+        //Proprietà costanti
 
-            this.liters = Math.Min(liters, maxCapacity);
+        private const float maxCapacity = 1.5f;
+
+
+        //Costruttore
+        public BottledWater(string name, string description, float basePrice, float liters, int ph, string waterSpring, bool isCarbonated = false) : base(name, description, basePrice)
+        {
+            //this.maxCapacity = 1.5f;
+
+            if(liters > maxCapacity || liters < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(liters));
+            }
+
+            if(ph > 10 || ph < 0)
+            {
+                throw new ArgumentOutOfRangeException("Il valore del ph inserito non è valido");
+            }
+
+            this.liters = liters;
             this.ph = ph;
             this.waterSpring = waterSpring;
             this.isCarbonated = isCarbonated;
@@ -74,20 +87,24 @@ namespace CSharpOOPShop3
         {
             if (liters == 0)
             {
-                Console.WriteLine("La bottiglia è vuota.");
+                throw new InvalidOperationException("Non puoi bere acqua da una bottiglia vuota.");
+            }
+            else if(litersToDrink > liters)
+            {
+                throw new ArgumentOutOfRangeException("Non puoi bere più acqua di quella che è rimasta in bottiglia.");
             }
             else
             {
-                liters = Math.Max(0, (liters - litersToDrink));
+                liters -= litersToDrink;
             }
+            
         }
 
         public void Refill(float litersToRefill)
         {
-            if ((liters + litersToRefill) >= maxCapacity)
+            if ((liters + litersToRefill) > maxCapacity)
             {
-                Console.WriteLine("La bottiglia è completamente piena.");
-                liters = maxCapacity;
+                throw new ArgumentOutOfRangeException("Non puoi riempire la bottiglia oltre il massimo della sua capacità!");
             }
             else
             {
@@ -98,6 +115,11 @@ namespace CSharpOOPShop3
 
         public void Empty()
         {
+            if(liters == 0)
+            {
+                throw new InvalidOperationException("La bottiglia è già vuota!");
+            }
+
             Console.WriteLine("Parlando di sprechi...");
             liters = 0;
         }
@@ -116,6 +138,13 @@ namespace CSharpOOPShop3
             }
         }
 
+        //METODO STATICO. Preso un numero, lo moltiplica per la costante specificata dei galloni.
+
+        private static float ConvertToGallons(float num)
+        {
+            return num * 3.785f;
+        }
+
         //Override del metodo della classe padre.
 
         public override void PrintProductDetails()
@@ -128,6 +157,7 @@ namespace CSharpOOPShop3
             Console.WriteLine("Descrizione prodotto: " + GetProductDescription());
 
             Console.WriteLine("Litri in bottiglia: " + GetLiters() + "l");
+            Console.WriteLine("Litri in galloni: " + ConvertToGallons(liters) + " galloni");
             Console.WriteLine("pH dell'acqua: " + GetPH());
             Console.WriteLine("Sorgente di provenienza: " + GetSpring());
             Console.WriteLine("Frizzante: " + GetCarbonated());
