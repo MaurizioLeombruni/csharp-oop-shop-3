@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CSharpOOPShop3/1.0.0": {
+        "runtime": {
+          "CSharpOOPShop3.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSharpOOPShop3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
