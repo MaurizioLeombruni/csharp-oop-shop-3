@@ -21,7 +21,7 @@ namespace CSharpOOPShop3
         {
             maxPieces = 5;
 
-            for (int i = 0; i < maxPieces; i++)
+            for (int i = 0; i < fruits.Length; i++)
             {
                 fruitInBasket.Add(fruits[i]);
             }

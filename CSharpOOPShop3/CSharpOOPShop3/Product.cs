@@ -15,6 +15,9 @@ namespace CSharpOOPShop3
         private float productPriceBase;
         private float productPriceVAT;
 
+        //ATTRIBUTO STATICO
+        private static int productCounter;
+
         //COSTRUTTORE: Il prodotto viene dichiarato immettendone nome, descrizione e prezzo di base.
         //Il codice e la sua versione compilata vengono instanziati in automatico, e il valore IVA (VAT in inglese) è di default messo a 0.22 (22% è l'IVA standard italiana,
         //almeno a quanto dice Wikipedia kek)
@@ -28,6 +31,9 @@ namespace CSharpOOPShop3
 
             productCode = GenerateProductCode();
             productCodeCompiled = GeneratePaddedCode(productCode);
+
+            //Incrementa il contatore di 1 ogni volta che viene instanziato un prodotto, indipendentemente da quale sottoclasse appartenga.
+            productCounter++;
         }
 
         //Funzioni getter. Restituiscono il valore della loro proprietà.
@@ -75,6 +81,13 @@ namespace CSharpOOPShop3
 
             tempPrice = (float)(productPriceBase * (1 + productPriceVAT));
             return tempPrice;
+        }
+
+        //Questo metodo ci permette di accedere al contatore di prodotti senza renderlo public.
+        //In caso il contatore possa o debba essere modificato dall'esterno, questa funzione può essere sostituita o eliminata.
+        public void PrintProductCounter()
+        {
+            Console.WriteLine("Al momento ci sono " + productCounter + " prodotti.");
         }
 
         //Stampa il prezzo base del prodotto.
