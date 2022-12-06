@@ -67,7 +67,7 @@ namespace CSharpOOPShop3
         {
             if (fruitInBasket.Count == maxPieces)
             {
-                Console.WriteLine("Il cestello è pieno.");
+                throw new InvalidOperationException("Il cestello è pieno.");
             }
             else
             {
@@ -81,7 +81,7 @@ namespace CSharpOOPShop3
         {
             if (fruitInBasket.Count == 0)
             {
-                Console.WriteLine("Non c'è nulla nel cestello.");
+                throw new InvalidOperationException("Il cestello è vuoto.");
             }
             else
             {
@@ -95,7 +95,7 @@ namespace CSharpOOPShop3
         {
             if (fruitInBasket.Count == 0)
             {
-                Console.WriteLine("Non c'è nulla nel cestello.");
+                throw new InvalidOperationException("Il cestello è già vuoto.");
             }
             else
             {

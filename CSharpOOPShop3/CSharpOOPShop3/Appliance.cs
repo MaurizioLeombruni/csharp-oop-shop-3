@@ -50,14 +50,21 @@ namespace CSharpOOPShop3
         //Setter (probabilmente inutile)
         public void SetWeight(float weight)
         {
-            this.weight = weight;
+            if(weight < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(weight));
+            }
+            else
+            {
+                this.weight = weight;
+            }
         }
 
         public void TurnOn()
         {
             if (isTurnedOn)
             {
-                Console.WriteLine("L'elettrodomestico è già acceso.");
+                throw new InvalidOperationException("L'elettrodomestico è già acceso!");
             }
             else
             {
@@ -75,7 +82,7 @@ namespace CSharpOOPShop3
             }
             else
             {
-                Console.WriteLine("Ah ah ah il bottone fa click! (L'elettrodomestico è già spento.)");
+                throw new InvalidOperationException("L'elettrodomestico è già spento!");
             }
         }
 
@@ -87,7 +94,7 @@ namespace CSharpOOPShop3
             }
             else
             {
-                Console.WriteLine("L'elettrodomestico è troppo pesante. Forse ti serve una mano?");
+                throw new ArgumentOutOfRangeException(nameof(strength));
             }
         }
 
@@ -99,7 +106,7 @@ namespace CSharpOOPShop3
             }
             else
             {
-                Console.WriteLine("Collegando l'elettrodomestico faresti saltare tutto!");
+                throw new ArgumentOutOfRangeException(nameof(wattage));
             }
         }
 

@@ -139,6 +139,8 @@ namespace CSharpOOPShop3
             }
         }
 
+        //METODI STATICI
+
         //Genera randomicamente un integer da utilizzare come codice base.
         private static int GenerateProductCode()
         {

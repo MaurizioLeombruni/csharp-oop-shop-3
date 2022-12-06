@@ -78,11 +78,11 @@ namespace CSharpOOPShop3
             //Se il cibo è irradiato o chiuso, termina la funzione senza fare nulla. Altrimenti consuma il cibo e manda un messaggio apposito.
             if (isContaminated)
             {
-                Console.WriteLine("Non puoi mangiare cibo irradiato!");
+                throw new InvalidOperationException("Non puoi mangiare cibo irradiato!");
             }
             else if (isSealed)
             {
-                Console.WriteLine("Dovresti prima aprire la scatola.");
+                throw new InvalidOperationException("Non puoi mangiare senza aprire la scatoletta prima.");
             }
             else if (amount >= weight)
             {
@@ -108,7 +108,7 @@ namespace CSharpOOPShop3
             }
             else
             {
-                Console.WriteLine("La scatoletta è già aperta.");
+                throw new InvalidOperationException("La scatoletta è già aperta.");
             }
         }
 
@@ -133,7 +133,7 @@ namespace CSharpOOPShop3
             }
             else
             {
-                Console.WriteLine("Il cibo sembra non essere irradiato...");
+                throw new InvalidOperationException("Il cibo non è irradiato.");
             }
         }
 
